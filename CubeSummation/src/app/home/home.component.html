@@ -14,19 +14,23 @@
 
   <div fxLayout="row" fxLayout.sm="row" fxLayout.xs="column" fxLayoutAlign.gt-md="space-around center" fxLayoutGap="10px">
     <div fxFlex="40">
-      <h3 class="text-center">INPUT</h3>
-      <mat-input-container class="input-box">
-        <textarea matInput rows=15></textarea>
-      </mat-input-container>
+      <mat-form-field fxFlex>
+        <h3 class="text-center">INPUT</h3>
+        <mat-input-container class="input-box">
+          <textarea matInput rows=15 [(ngModel)]="inputBox"></textarea>
+        </mat-input-container>
+      </mat-form-field>
     </div>
     <div fxFlex="20" fxLayoutAlign="center center">
-      <button>SOLVE</button>
+      <button mat-button (click)="solve()">SOLVE</button>
     </div>
     <div fxFlex="40">
-      <h3 class="text-center">OUTPUT</h3>
-      <mat-input-container class="input-box">
-        <textarea matInput rows=15></textarea>
-      </mat-input-container>
+      <mat-form-field fxFlex>
+        <h3 class="text-center">OUTPUT</h3>
+        <mat-input-container class="input-box">
+          <textarea matInput rows=15 [(ngModel)]="outputBox"></textarea>
+        </mat-input-container>
+      </mat-form-field>
     </div>
   </div>
 
