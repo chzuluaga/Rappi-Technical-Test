@@ -9,6 +9,8 @@ export class Input {
     }
 
     addCase(testCase: Case) {
+        if(!this.cases)
+            this.cases = [];
         this.cases.push(testCase);
     }
 
