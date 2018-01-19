@@ -9,6 +9,7 @@ import { MatButtonModule, MatInputModule, MatCardModule } from '@angular/materia
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { InputService } from './services/input.service';
+import { MatrixService } from './services/matrix.service';
 
 
 @NgModule({
@@ -25,7 +26,7 @@ import { InputService } from './services/input.service';
     MatInputModule,
     MatCardModule
   ],
-  providers: [InputService],
+  providers: [InputService, MatrixService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

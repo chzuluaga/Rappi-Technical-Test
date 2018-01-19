@@ -9,9 +9,13 @@ export class Input {
     }
 
     addCase(testCase: Case) {
-        if(!this.cases)
+        if (!this.cases)
             this.cases = [];
         this.cases.push(testCase);
+    }
+
+    getCases(): Case[] {
+        return this.cases;
     }
 
 }

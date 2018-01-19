@@ -11,8 +11,12 @@ export class Case {
     }
 
     addQuery(query: Query) {
-        if(!this.queries)
+        if (!this.queries)
             this.queries = [];
         this.queries.push(query);
+    }
+
+    getQueries(): Query[] {
+        return this.queries;
     }
 }

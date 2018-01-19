@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Input } from '../shared/Input';
 import { InputService } from '../services/input.service';
+import { MatrixService } from '../services/matrix.service';
+
 import { Constants } from '../shared/Constants';
 
 @Component({
@@ -13,8 +15,9 @@ export class HomeComponent implements OnInit {
   inputBox: string;
   outputBox: string;
   input: Input;
+  answer: string;
 
-  constructor(private inputService: InputService) { }
+  constructor(private inputService: InputService, private matrixService: MatrixService) { }
 
   ngOnInit() {
   }
@@ -23,7 +26,7 @@ export class HomeComponent implements OnInit {
     Extracts data from the input box
     returns true if input data is valid
   */
-  ExtractData(): boolean {
+  ExtractInputData(): boolean {
     if (!this.inputBox) {
       return false;
     }
@@ -38,12 +41,30 @@ export class HomeComponent implements OnInit {
 
   // Solves Cube Summation problem
   solve() {
-    if (!this.ExtractData()) {
-      this.outputBox = Constants.INVALID_DATA;
+    this.outputBox = "";
+    let result = "";
+    if (!this.ExtractInputData()) {
+      result = Constants.INVALID_DATA;
     } else {
-      console.log("ok");
-      this.outputBox = "all its okay";
+      for (let testCase of this.input.getCases()) {
+        this.matrixService.newCase();
+        result += this.answerQueries(testCase);
+      }
     }
+    this.outputBox = result;
+  }
+
+  // returns the answers to the queries
+  answerQueries(testCase): string {
+    let result = "";
+    for (let query of testCase.getQueries()) {
+      if (query.getType() == Constants.UPDATE) {
+        this.matrixService.updateCell(query.getCoordinateAt(0), query.getValueToChange());
+      } else {
+        result += this.matrixService.getSum(query.getCoordinateAt(0), query.getCoordinateAt(1)) + "\n";
+      }
+    }
+    return result;
   }
 
 }

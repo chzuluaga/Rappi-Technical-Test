@@ -14,6 +14,7 @@ export class InputService {
   constructor() {
     this.input = new Input();
   }
+
   getNumber(data: string) {
     let num = Number(data);
     if (isNaN(num)) {
@@ -40,7 +41,9 @@ export class InputService {
     return coor;
   }
 
+  // Checks if Input is valid and stores it  
   setInput(dataArray: string[]): Observable<any> {
+    this.input = new Input();
     let errmess = null;
     let tokenCounter = 0;
     try {
@@ -74,7 +77,7 @@ export class InputService {
             if (value === null) {
               throw new Error();
             }
-
+            query.setType(Constants.UPDATE);
             query.addCoordinate(coor);
             query.updateValue(value);
           } else {
@@ -92,7 +95,6 @@ export class InputService {
 
     } catch (e) {
       errmess = Constants.INVALID_DATA + e;
-      console.log(errmess);
       return Observable.of(null);
     }
 
